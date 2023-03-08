@@ -9,18 +9,18 @@ export const updateUserService = async (
   data: tUserUpdate
 ): Promise<tUser> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
-  const OldUser = await userRepository.findOne({
+  const OldUser: User | null = await userRepository.findOne({
     where: {
       id: idParams,
     },
   });
 
-  const updateUser = userRepository.create({
+  const updateUser: User = userRepository.create({
     ...OldUser,
     ...data,
   });
 
   await userRepository.save(updateUser);
-  const newUser = userSchema.parse(updateUser);
+  const newUser: tUser = userSchema.parse(updateUser);
   return newUser;
 };

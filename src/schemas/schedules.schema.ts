@@ -19,3 +19,5 @@ export const ScheduleSchema = z.object({
   realEstate: realEstadeSchema,
   user: userSchema,
 });
+
+export const scheduleSchemaArray = ScheduleSchema.array();

@@ -8,6 +8,6 @@ export const createUserService = async (data: tCreateUser): Promise<tUser> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
   const user: User = userRepository.create(data);
   await userRepository.save(user);
-  const newUser = userSchema.parse(user);
+  const newUser: tUser = userSchema.parse(user);
   return newUser;
 };

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { realEstadeSchema } from "./realEstate.schema";
+import { realEstadeSchemaArray } from "./realEstate.schema";
 export const createCategorySchema = z.object({
   name: z.string(),
 });
@@ -9,3 +9,7 @@ export const categorySchema = createCategorySchema.extend({
 });
 
 export const categoryArraySchema = categorySchema.array();
+
+export const realEstatePerCategory = categorySchema.extend({
+  realEstate: realEstadeSchemaArray,
+});

@@ -19,6 +19,6 @@ export const listAllRealEstateController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const realEstates = await listAllRealEstateService();
+  const realEstates: tRealEstate[] = await listAllRealEstateService();
   return res.status(200).json(realEstates);
 };

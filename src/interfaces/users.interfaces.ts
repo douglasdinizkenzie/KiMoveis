@@ -4,7 +4,6 @@ import {
   createUserSchema,
   userSchema,
   userSchemaArray,
-  userSchemaUpdate,
 } from "../schemas/users.schema";
 
 export type tCreateUser = z.infer<typeof createUserSchema>;

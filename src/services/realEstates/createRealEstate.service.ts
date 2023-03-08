@@ -8,7 +8,6 @@ import {
   tRealEstate,
 } from "../../interfaces/realEstate.interfaces";
 import { addresSchema } from "../../schemas/address.schema";
-import { realEstadeSchema } from "../../schemas/realEstate.schema";
 
 export const createRealEstateService = async (
   categoryId: number,
@@ -52,6 +51,5 @@ export const createRealEstateService = async (
   });
 
   await realEstateRepository.save(createRealEstate);
-  const newRealEstate = realEstadeSchema.parse(createRealEstate);
-  return newRealEstate;
+  return createRealEstate;
 };

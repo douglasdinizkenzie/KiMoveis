@@ -19,7 +19,10 @@ export const loginService = async (data: tLogin): Promise<string> => {
     throw new AppError("Invalid credentials", 401);
   }
 
-  const comparePassword = await compare(data.password, userInfos.password);
+  const comparePassword: boolean = await compare(
+    data.password,
+    userInfos.password
+  );
 
   if (!comparePassword) {
     throw new AppError("Invalid credentials", 401);

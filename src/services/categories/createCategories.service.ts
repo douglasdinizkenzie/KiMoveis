@@ -12,7 +12,7 @@ export const createCategoriesService = async (
 ): Promise<tCategory> => {
   const categoryRepository: Repository<Category> =
     AppDataSource.getRepository(Category);
-  const category = categoryRepository.create(data);
+  const category: Category = categoryRepository.create(data);
   await categoryRepository.save(category);
   const newCategory: tCategory = categorySchema.parse(category);
   return newCategory;

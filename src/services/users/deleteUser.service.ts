@@ -4,7 +4,7 @@ import { User } from "../../entities";
 
 export const softDeleteUserService = async (idParam: number): Promise<void> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
-  const user = await userRepository.findOne({
+  const user: User | null = await userRepository.findOne({
     where: {
       id: idParam,
     },

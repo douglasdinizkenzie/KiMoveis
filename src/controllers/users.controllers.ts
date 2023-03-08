@@ -16,7 +16,7 @@ export const createUserController = async (
 ): Promise<Response> => {
   const requestData: tCreateUser = req.body;
 
-  const newUser = await createUserService(requestData);
+  const newUser: tUser = await createUserService(requestData);
 
   return res.status(201).json(newUser);
 };
@@ -35,7 +35,7 @@ export const updateUserController = async (
 ): Promise<Response> => {
   const data: tUserUpdate = req.body;
   const id: number = Number(req.params.id);
-  const newUser = await updateUserService(id, data);
+  const newUser: tUser = await updateUserService(id, data);
 
   return res.status(200).json(newUser);
 };

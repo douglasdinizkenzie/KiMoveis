@@ -8,24 +8,26 @@ export const createSchedulesService = async (
   data: tCreateScheduleWithoutRealEstate,
   idUser: number,
   RealEstateId: number
-) => {
+): Promise<void> => {
   const scheduleRepository: Repository<Schedule> =
     AppDataSource.getRepository(Schedule);
   const realEstateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-  const userData = await userRepository.findOne({
+  const userData: User | null = await userRepository.findOne({
     where: {
       id: idUser,
     },
   });
 
-  const realEstateExist = await realEstateRepository.findOne({
-    where: {
-      id: RealEstateId,
-    },
-  });
+  const realEstateExist: RealEstate | null = await realEstateRepository.findOne(
+    {
+      where: {
+        id: RealEstateId,
+      },
+    }
+  );
 
   if (!realEstateExist) {
     throw new AppError("RealEstate not found", 404);
@@ -45,7 +47,7 @@ export const createSchedulesService = async (
     throw new AppError("Invalid date, work days are monday to friday", 400);
   }
 
-  const existSchedule = await scheduleRepository
+  const existSchedule: Schedule | null = await scheduleRepository
     .createQueryBuilder("schedule")
     .where("schedule.date = :date", { date: parsedDateObject })
     .andWhere("schedule.hour = :hour", { hour: data.hour })
@@ -61,7 +63,7 @@ export const createSchedulesService = async (
     );
   }
 
-  const existUserSchedule = await scheduleRepository
+  const existUserSchedule: Schedule | null = await scheduleRepository
     .createQueryBuilder("schedule")
     .where("schedule.date = :dateParams", { dateParams: parsedDateObject })
     .andWhere("schedule.hour = :hourParams", { hourParams: data.hour })

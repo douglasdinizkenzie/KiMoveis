@@ -7,16 +7,18 @@ export const listAllSchedulePerRealEstateService = async (idParams: number) => {
   const realEstateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
 
-  const realEstateExist = await realEstateRepository.findOne({
-    where: {
-      id: idParams,
-    },
-  });
+  const realEstateExist: RealEstate | null = await realEstateRepository.findOne(
+    {
+      where: {
+        id: idParams,
+      },
+    }
+  );
   if (!realEstateExist) {
     throw new AppError("RealEstate not found", 404);
   }
 
-  const realEstate = await realEstateRepository
+  const realEstate: RealEstate | null = await realEstateRepository
     .createQueryBuilder("realestate")
     .leftJoinAndSelect("realestate.address", "address")
     .leftJoinAndSelect("realestate.category", "category")
