@@ -52,11 +52,11 @@ Configure as variáveis de ambiente com suas credenciais do Postgres e uma nova 
 Execute as migrations com o comando:
 
 ```
-yarn typeorm migration:run -d src/data-source.ts
+yarn typeorm migration:run -- -d src/data-source.ts
 
 ou
 
-npm run typeorm migration:run -d src/data-source.ts
+npm run typeorm migration:run -- -d src/data-source.ts
 ```
 
 Para rodar o servidor localmente: 
